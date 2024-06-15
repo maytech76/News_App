@@ -1,4 +1,8 @@
 
+// To parse this JSON data, do
+//
+//     final newsResponse = newsResponseFromJson(jsonString);
+
 import 'dart:convert';
 
 NewsResponse newsResponseFromJson(String str) => NewsResponse.fromJson(json.decode(str));
@@ -31,13 +35,13 @@ class NewsResponse {
 
 class Article {
     Source source;
-    String author;
+    String? author;
     String title;
-    dynamic description;
+    String? description;
     String url;
-    dynamic urlToImage;
+    String? urlToImage;
     DateTime publishedAt;
-    dynamic content;
+    String? content;
 
     Article({
         required this.source,
@@ -74,8 +78,8 @@ class Article {
 }
 
 class Source {
-    Id id;
-    Name name;
+    String? id;
+    String name;
 
     Source({
         required this.id,
@@ -83,41 +87,12 @@ class Source {
     });
 
     factory Source.fromJson(Map<String, dynamic> json) => Source(
-        id: idValues.map[json["id"]]!,
-        name: nameValues.map[json["name"]]!,
+        id: json["id"],
+        name: json["name"],
     );
 
-
     Map<String, dynamic> toJson() => {
-        "id": idValues.reverse[id],
-        "name": nameValues.reverse[name],
+        "id": id,
+        "name": name,
     };
-}
-
-enum Id {
-    GOOGLE_NEWS
-}
-
-final idValues = EnumValues({
-    "google-news": Id.GOOGLE_NEWS
-});
-
-enum Name {
-    GOOGLE_NEWS
-}
-
-final nameValues = EnumValues({
-    "Google News": Name.GOOGLE_NEWS
-});
-
-class EnumValues<T> {
-    Map<String, T> map;
-    late Map<T, String> reverseMap;
-
-    EnumValues(this.map);
-
-    Map<T, String> get reverse {
-            reverseMap = map.map((k, v) => MapEntry(v, k));
-            return reverseMap;
-    }
 }

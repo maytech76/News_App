@@ -18,7 +18,7 @@ class NewsService with ChangeNotifier{
 
   getTopHeadlines()   async{
 
-    final uri = Uri.parse('https://newsapi.org/v2/top-headlines?country=ve&apiKey=431d4fc21f6041f8a55ababc7795044f');
+    final uri = Uri.parse('https://newsapi.org/v2/top-headlines?country=us&apiKey=431d4fc21f6041f8a55ababc7795044f');
 
     final resp = await http.get(uri);
 

@@ -14,10 +14,14 @@ class Tab1Page extends StatelessWidget {
   Widget build(BuildContext context) {
 
 
-    final newsService = Provider.of<NewsService>(context);
+    final headlines = Provider.of<NewsService>(context).headlines;
 
     return  Scaffold(
-      body: ListaNoticias( newsService.headlines)
-      );
+      body: (headlines.length == 0) ? Center(
+        child: CircularProgressIndicator(),
+      )
+       :ListaNoticias( headlines),
+     
+    );
   }
 }
